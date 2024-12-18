@@ -95,11 +95,10 @@ async function processCSV(inputFile, outputFile) {
         let category = categorizeByKeyword(row.subject);
         if (!category) {
           // Use OpenAI API if no category was matched
-          // category = await classifyWithAPI(row.subject);
-          console.log(row.subject)
+          category = await classifyWithAPI(row.subject);
         }
         row["normalized_subject"] = category;
-        // console.log(`Classified: ${row.subject} -> ${row["normalized_subject"]}`);
+        console.log(`Classified: ${row.subject} -> ${row["normalized_subject"]}`);
       }
       saveToCSV(results, outputFile);
     });
